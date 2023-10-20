@@ -120,6 +120,14 @@ void updateWandererLocation(Map *map);
 void updateExplorerLocation(Map *map);
 void updatePCLocation(Map *map, int move);
 void openTrainerLocationList(Map *map);
+void hikerPosFromPC(int hikerX, int hikerY, int pcX, int pcY);
+void rivalPosFromPC(int rivalX, int rivalY, int pcX, int pcY);
+void pacerPosFromPC(int pacerX, int pacerY, int pcX, int pcY);
+void wandererPosFromPC(int wandererX, int wandererY, int pcX, int pcY);
+void sentriePosFromPC(int sentrieX, int sentrieY, int pcX, int pcY);
+void explorerPosFromPC(int explorerX, int explorerY, int pcX, int pcY);
+
+
 int numtrainers = 10;
 
 int main(int argc, char* argv[]) {
@@ -229,7 +237,7 @@ int main(int argc, char* argv[]) {
             usleep(500000);
             printMap(&map);
        }else if(move =='4' || move == 'h'){
-        updatePCLocation(&map, move);
+            updatePCLocation(&map, move);
             updateHikerLocation(&map);
             updateRivalLocation(&map);
             updatePacerLocation(&map);
@@ -238,7 +246,7 @@ int main(int argc, char* argv[]) {
             fflush(stdout);
             usleep(500000);
             printMap(&map);
-       }else if(move == '5' || move =='.'){
+       }else if(move == '5' || move =='.' || move == ' '){
             updatePCLocation(&map, move);
             updateHikerLocation(&map);
             updateRivalLocation(&map);
@@ -249,14 +257,21 @@ int main(int argc, char* argv[]) {
             usleep(500000);
             printMap(&map);
        }else if(move =='t'){
-            updateHikerLocation(&map);
-            updateRivalLocation(&map);
-            updatePacerLocation(&map);
-            updateWandererLocation(&map);
-            updateExplorerLocation(&map);
-            fflush(stdout);
-            usleep(500000);
-            printMap(&map);
+          fflush(stdout);
+          usleep(500000);
+          printMap(&map);
+          //hiker
+          hikerPosFromPC(hiker.position.x, hiker.position.y,pc.position.x, pc.position.y);
+          //rival
+          rivalPosFromPC(rival.position.x, rival.position.y,pc.position.x, pc.position.y);
+          //pacer
+          pacerPosFromPC(pacer.position.x, pacer.position.y,pc.position.x, pc.position.y);
+          //wanderer
+          wandererPosFromPC(wanderer.position.x, wanderer.position.y,pc.position.x, pc.position.y);
+          //sentrie
+          sentriePosFromPC(sentrie.position.x, sentrie.position.y,pc.position.x, pc.position.y);
+          //explorer
+          explorerPosFromPC(explorer.position.x, explorer.position.y,pc.position.x, pc.position.y);
        }
 
       
@@ -265,9 +280,6 @@ int main(int argc, char* argv[]) {
     endwin();
     return 0;
 }
-
-
-
 
 void generateMap(Map *map, int numtrainers) {
     fillMapGrass(map);
@@ -343,8 +355,6 @@ explorer.direction = getRandom(0, 3);
     }
     
 }
-
-
 
 
 void printMap(Map *map) {
@@ -766,9 +776,6 @@ void updatePCLocation(Map *map, int move){
        }
              
 
-    
-
-
    if (newX >= 0 && newX < WIDTH - 1 && newY >= 0 && newY < LENGTH - 1) {
         pc.position.x = newX;
         pc.position.y = newY;
@@ -776,6 +783,150 @@ void updatePCLocation(Map *map, int move){
 
 }
 
-void openTrainerLocationList(Map *map){
+void hikerPosFromPC(int hikerX, int hikerY, int pcX, int pcY) {
+    int north = hikerY - pcY;
+    int south = pcY - hikerY;
+    int west = hikerX - pcX;
+    int east = pcX - hikerX;
 
+    char directionStr[100]; 
+
+    if (north > 0) {
+        sprintf(directionStr, "%d north", north);
+    } else if (south > 0) {
+        sprintf(directionStr, "%d south", south);
+    } 
+
+    if (west > 0) {
+        sprintf(directionStr + strlen(directionStr), " by %d west", west);
+    } else if (east > 0) {
+        sprintf(directionStr + strlen(directionStr), " by %d east", east);
+    } 
+
+    mvprintw(22, 0, "hiker: %s", directionStr);
+    refresh(); 
+}
+
+void rivalPosFromPC(int rivalX, int rivalY, int pcX, int pcY) {
+    int north = rivalY - pcY;
+    int south = pcY - rivalY;
+    int west = rivalX - pcX;
+    int east = pcX - rivalX;
+
+    char directionStr[100]; 
+
+    if (north > 0) {
+        sprintf(directionStr, "%d north", north);
+    } else if (south > 0) {
+        sprintf(directionStr, "%d south", south);
+    } 
+
+    if (west > 0) {
+        sprintf(directionStr + strlen(directionStr), " by %d west", west);
+    } else if (east > 0) {
+        sprintf(directionStr + strlen(directionStr), " by %d east", east);
+    } 
+
+    mvprintw(23, 0, "rival: %s", directionStr);
+    refresh(); 
+}
+
+void pacerPosFromPC(int pacerX, int pacerY, int pcX, int pcY) {
+    int north = pacerY - pcY;
+    int south = pcY - pacerY;
+    int west = pacerX - pcX;
+    int east = pcX - pacerX;
+
+    char directionStr[100]; 
+
+    if (north > 0) {
+        sprintf(directionStr, "%d north", north);
+    } else if (south > 0) {
+        sprintf(directionStr, "%d south", south);
+    } 
+
+    if (west > 0) {
+        sprintf(directionStr + strlen(directionStr), " by %d west", west);
+    } else if (east > 0) {
+        sprintf(directionStr + strlen(directionStr), " by %d east", east);
+    } 
+
+    mvprintw(24, 0, "pacer: %s", directionStr);
+    refresh(); 
+}
+
+void wandererPosFromPC(int wandererX, int wandererY, int pcX, int pcY) {
+    int north = wandererY - pcY;
+    int south = pcY - wandererY;
+    int west = wandererX - pcX;
+    int east = pcX - wandererX;
+
+    char directionStr[100]; 
+
+    if (north > 0) {
+        sprintf(directionStr, "%d north", north);
+    } else if (south > 0) {
+        sprintf(directionStr, "%d south", south);
+    } 
+
+    if (west > 0) {
+        sprintf(directionStr + strlen(directionStr), " by %d west", west);
+    } else if (east > 0) {
+        sprintf(directionStr + strlen(directionStr), " by %d east", east);
+    } else {
+        sprintf(directionStr + strlen(directionStr), " by on the same longitude");
+    }
+
+    mvprintw(25, 0, "wanderer: %s", directionStr);
+    refresh(); 
+}
+
+void sentriePosFromPC(int sentrieX, int sentrieY, int pcX, int pcY) {
+    int north = sentrieY - pcY;
+    int south = pcY - sentrieY;
+    int west = sentrieX - pcX;
+    int east = pcX - sentrieX;
+
+    char directionStr[100]; 
+
+    if (north > 0) {
+        sprintf(directionStr, "%d north", north);
+    } else if (south > 0) {
+        sprintf(directionStr, "%d south", south);
+    } 
+
+    if (west > 0) {
+        sprintf(directionStr + strlen(directionStr), " by %d west", west);
+    } else if (east > 0) {
+        sprintf(directionStr + strlen(directionStr), " by %d east", east);
+    } 
+
+    mvprintw(26, 0, "sentrie: %s", directionStr);
+    refresh(); 
+}
+
+void explorerPosFromPC(int explorerX, int explorerY, int pcX, int pcY) {
+    int north = explorerY - pcY;
+    int south = pcY - explorerY;
+    int west = explorerX - pcX;
+    int east = pcX - explorerX;
+
+    char directionStr[100]; 
+
+    if (north > 0) {
+        sprintf(directionStr, "%d north", north);
+    } else if (south > 0) {
+        sprintf(directionStr, "%d south", south);
+    } 
+
+    if (west > 0) {
+        sprintf(directionStr + strlen(directionStr), " by %d west", west);
+    } else if (east > 0) {
+        sprintf(directionStr + strlen(directionStr), " by %d east", east);
+    } else {
+        sprintf(directionStr + strlen(directionStr), " by on the same longitude");
+    }
+
+    mvprintw(27, 0, "explorer: %s", directionStr);
+    refresh(); 
 }
