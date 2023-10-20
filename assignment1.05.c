@@ -981,30 +981,29 @@ void isTrainerThere() {
     int hikerX = hiker.position.x;
     int hikerY = hiker.position.y;
 
-   if(pcX == hikerX){
-     mvprintw(26, 0, "testing hiker1");
+   if(pcX == hikerX && pcY == hikerY){
+     mvprintw(22, 0, "pc: (%d, %d)  hiker: (%d, %d)", pcX, pcY, hikerX, hikerY);
+     mvprintw(23, 0, "testing hiker1");
    }
 
-   if(pcX-1 == hikerX){
-    mvprintw(26, 0, "testing hiker1");
+   if(pcX-1 == hikerX && pcY == hikerY){
+    mvprintw(22, 0, "pc: (%d, %d)  hiker: (%d, %d)", pcX, pcY, hikerX, hikerY);
+    mvprintw(23, 0, "testing hiker2");
    }
 
-   if(pcX+1 == hikerX){
-    mvprintw(26, 0, "testing hiker1");
+   if(pcX+1 == hikerX &&  pcY == hikerY){
+    mvprintw(22, 0, "pc: (%d, %d)  hiker: (%d, %d)", pcX, pcY, hikerX, hikerY);
+    mvprintw(23, 0, "testing hiker3");
    }
 
-  if(pcY == hikerY){
-     mvprintw(26, 0, "testing hiker1");
+   if(pcY-1 == hikerY && pcX == hikerX){
+    mvprintw(22, 0, "pc: (%d, %d)  hiker: (%d, %d)", pcX, pcY, hikerX, hikerY);
+    mvprintw(23, 0, "testing hiker4");
    }
 
-   if(pcY-1 == hikerY){
-    mvprintw(26, 0, "testing hiker1");
-   }
-
-   if(pcY+1 == hikerY){
-    mvprintw(26, 0, "testing hiker1");
+   if(pcY+1 == hikerY && pcX == hikerX){
+    mvprintw(22, 0, "pc: (%d, %d)  hiker: (%d, %d)", pcX, pcY, hikerX, hikerY);
+    mvprintw(23, 0, "testing hiker5");
    }
 
 }
-
-
