@@ -995,30 +995,36 @@ void isHikerThere(){
     int pcY = pc.position.y;
     int hikerX = hiker.position.x;
     int hikerY = hiker.position.y;
+    int printBattle = 0;
      if(pcX == hikerX && pcY == hikerY){
      mvprintw(22, 0, "pc: (%d, %d)  hiker: (%d, %d)", pcX, pcY, hikerX, hikerY);
-     mvprintw(23, 0, "testing hiker1");
+     printBattle = 1;
    }
 
    if(pcX-1 == hikerX && pcY == hikerY){
     mvprintw(22, 0, "pc: (%d, %d)  hiker: (%d, %d)", pcX, pcY, hikerX, hikerY);
-    mvprintw(23, 0, "testing hiker2");
+     printBattle = 1;
    }
 
    if(pcX+1 == hikerX &&  pcY == hikerY){
     mvprintw(22, 0, "pc: (%d, %d)  hiker: (%d, %d)", pcX, pcY, hikerX, hikerY);
-    mvprintw(23, 0, "testing hiker3");
+     printBattle = 1;
    }
 
    if(pcY-1 == hikerY && pcX == hikerX){
     mvprintw(22, 0, "pc: (%d, %d)  hiker: (%d, %d)", pcX, pcY, hikerX, hikerY);
-    mvprintw(23, 0, "testing hiker4");
+     printBattle = 1;
    }
 
    if(pcY+1 == hikerY && pcX == hikerX){
     mvprintw(22, 0, "pc: (%d, %d)  hiker: (%d, %d)", pcX, pcY, hikerX, hikerY);
-    mvprintw(23, 0, "testing hiker5");
+     printBattle = 1;
    }
+
+    if(printBattle == 1){
+        mvprintw(23, 0, "You have entered a battle with a hiker!");
+    }
+
 }
 
 void isRivalThere(){
@@ -1026,30 +1032,36 @@ void isRivalThere(){
     int pcY = pc.position.y;
     int rivalX = rival.position.x;
     int rivalY = rival.position.y;
+       int printBattle = 0;
      if(pcX == rivalX && pcY == rivalY){
      mvprintw(22, 0, "pc: (%d, %d)  rival: (%d, %d)", pcX, pcY, rivalX, rivalY);
-     mvprintw(23, 0, "testing rival1");
+     printBattle = 1;
    }
 
    if(pcX-1 == rivalX && pcY == rivalY){
     mvprintw(22, 0, "pc: (%d, %d)  rival: (%d, %d)", pcX, pcY, rivalX, rivalY);
-    mvprintw(23, 0, "testing rival2");
+    printBattle = 1;
    }
 
    if(pcX+1 == rivalX &&  pcY == rivalY){
     mvprintw(22, 0, "pc: (%d, %d)  rival: (%d, %d)", pcX, pcY, rivalX, rivalY);
-    mvprintw(23, 0, "testing rival3");
+    printBattle = 1;
    }
 
    if(pcY-1 == rivalY && pcX == rivalX){
     mvprintw(22, 0, "pc: (%d, %d)  rival: (%d, %d)", pcX, pcY, rivalX, rivalY);
-    mvprintw(23, 0, "testing rival4");
+    printBattle = 1;
    }
 
    if(pcY+1 == rivalY && pcX == rivalX){
     mvprintw(22, 0, "pc: (%d, %d)  rival: (%d, %d)", pcX, pcY, rivalX, rivalY);
-    mvprintw(23, 0, "testing rival5");
+    printBattle = 1;
    }
+
+     if(printBattle == 1){
+        mvprintw(23, 0, "You have entered a battle with a rival!");
+    }
+
 }
 
 void isPacerThere(){
@@ -1057,30 +1069,36 @@ void isPacerThere(){
     int pcY = pc.position.y;
     int pacerX = pacer.position.x;
     int pacerY = pacer.position.y;
+    int printBattle = 0;
      if(pcX == pacerX && pcY == pacerY){
      mvprintw(22, 0, "pc: (%d, %d)  pacer: (%d, %d)", pcX, pcY, pacerX, pacerY);
-     mvprintw(23, 0, "testing pacer1");
+     printBattle = 1;
    }
 
    if(pcX-1 == pacerX && pcY == pacerY){
     mvprintw(22, 0, "pc: (%d, %d)  pacer: (%d, %d)", pcX, pcY, pacerX, pacerY);
-    mvprintw(23, 0, "testing pacer2");
+    printBattle = 1;
    }
 
    if(pcX+1 == pacerX &&  pcY == pacerY){
     mvprintw(22, 0, "pc: (%d, %d)  pacer: (%d, %d)", pcX, pcY, pacerX, pacerY);
-    mvprintw(23, 0, "testing pacer3");
+    printBattle = 1;
    }
 
    if(pcY-1 == pacerY && pcX == pacerX){
     mvprintw(22, 0, "pc: (%d, %d)  pacer: (%d, %d)", pcX, pcY, pacerX, pacerY);
-    mvprintw(23, 0, "testing pacer4");
+    printBattle = 1;
    }
 
    if(pcY+1 == pacerY && pcX == pacerX){
     mvprintw(22, 0, "pc: (%d, %d)  pacer: (%d, %d)", pcX, pcY, pacerX, pacerY);
-    mvprintw(23, 0, "testing pacer5");
+    printBattle = 1;
    }
+
+      if(printBattle == 1){
+        mvprintw(23, 0, "You have entered a battle with a pacer!");
+    }
+
 }
 
 void isWandererThere(){
@@ -1088,30 +1106,36 @@ void isWandererThere(){
     int pcY = pc.position.y;
     int wandererX = wanderer.position.x;
     int wandererY = wanderer.position.y;
+    int printBattle = 0;
      if(pcX == wandererX && pcY == wandererY){
      mvprintw(22, 0, "pc: (%d, %d)  wanderer: (%d, %d)", pcX, pcY, wandererX, wandererY);
-     mvprintw(23, 0, "testing wanderer1");
+     printBattle = 1;
    }
 
    if(pcX-1 == wandererX && pcY == wandererY){
     mvprintw(22, 0, "pc: (%d, %d)  wanderer: (%d, %d)", pcX, pcY, wandererX, wandererY);
-    mvprintw(23, 0, "testing wanderer2");
+     printBattle = 1;
    }
 
    if(pcX+1 == wandererX &&  pcY == wandererY){
     mvprintw(22, 0, "pc: (%d, %d)  wanderer: (%d, %d)", pcX, pcY, wandererX, wandererY);
-    mvprintw(23, 0, "testing wanderer3");
+     printBattle = 1;
    }
 
    if(pcY-1 == wandererY && pcX == wandererX){
     mvprintw(22, 0, "pc: (%d, %d)  wanderer: (%d, %d)", pcX, pcY, wandererX, wandererY);
-    mvprintw(23, 0, "testing wanderer4");
+     printBattle = 1;
    }
 
    if(pcY+1 == wandererY && pcX == wandererX){
     mvprintw(22, 0, "pc: (%d, %d)  wanderer: (%d, %d)", pcX, pcY, wandererX, wandererY);
-    mvprintw(23, 0, "testing wanderer5");
+     printBattle = 1;
    }
+
+    if(printBattle == 1){
+        mvprintw(23, 0, "You have entered a battle with a wanderer!");
+    }
+
 }
 
 void isSentrieThere(){
@@ -1119,30 +1143,36 @@ void isSentrieThere(){
     int pcY = pc.position.y;
     int sentrieX = sentrie.position.x;
     int sentrieY = sentrie.position.y;
+    int printBattle = 0;
      if(pcX == sentrieX && pcY == sentrieY){
      mvprintw(22, 0, "pc: (%d, %d)  sentrie: (%d, %d)", pcX, pcY, sentrieX, sentrieY);
-     mvprintw(23, 0, "testing sentrie1");
+     printBattle = 1;
    }
 
    if(pcX-1 == sentrieX && pcY == sentrieY){
     mvprintw(22, 0, "pc: (%d, %d)  sentrie: (%d, %d)", pcX, pcY, sentrieX, sentrieY);
-    mvprintw(23, 0, "testing sentrie2");
+    printBattle = 1;
    }
 
    if(pcX+1 == sentrieX &&  pcY == sentrieY){
     mvprintw(22, 0, "pc: (%d, %d)  sentrie: (%d, %d)", pcX, pcY, sentrieX, sentrieY);
-    mvprintw(23, 0, "testing sentrie3");
+    printBattle = 1;
    }
 
    if(pcY-1 == sentrieY && pcX == sentrieX){
     mvprintw(22, 0, "pc: (%d, %d)  sentrie: (%d, %d)", pcX, pcY, sentrieX, sentrieY);
-    mvprintw(23, 0, "testing sentrie4");
+    printBattle = 1;
    }
 
    if(pcY+1 == sentrieY && pcX == sentrieX){
     mvprintw(22, 0, "pc: (%d, %d)  sentrie: (%d, %d)", pcX, pcY, sentrieX, sentrieY);
-    mvprintw(23, 0, "testing sentrie5");
+    printBattle = 1;
    }
+
+      if(printBattle == 1){
+        mvprintw(23, 0, "You have entered a battle with a sentrie!");
+    }
+
 }
 
 void isExplorerThere(){
@@ -1150,28 +1180,34 @@ void isExplorerThere(){
     int pcY = pc.position.y;
     int explorerX = explorer.position.x;
     int explorerY = explorer.position.y;
+    int printBattle = 0;
      if(pcX == explorerX && pcY == explorerY){
      mvprintw(22, 0, "pc: (%d, %d)  explorer: (%d, %d)", pcX, pcY, explorerX, explorerY);
-     mvprintw(23, 0, "testing explorer1");
+     printBattle = 1;
    }
 
    if(pcX-1 == explorerX && pcY == explorerY){
     mvprintw(22, 0, "pc: (%d, %d)  explorer: (%d, %d)", pcX, pcY, explorerX, explorerY);
-    mvprintw(23, 0, "testing explorer2");
+    printBattle = 1;
    }
 
    if(pcX+1 == explorerX &&  pcY == explorerY){
     mvprintw(22, 0, "pc: (%d, %d)  explorer: (%d, %d)", pcX, pcY, explorerX, explorerY);
-    mvprintw(23, 0, "testing explorer3");
+    printBattle = 1;
    }
 
    if(pcY-1 == explorerY && pcX == explorerX){
     mvprintw(22, 0, "pc: (%d, %d)  explorer: (%d, %d)", pcX, pcY, explorerX, explorerY);
-    mvprintw(23, 0, "testing explorer4");
+    printBattle = 1;
    }
 
    if(pcY+1 == explorerY && pcX == explorerX){
     mvprintw(22, 0, "pc: (%d, %d)  explorer: (%d, %d)", pcX, pcY, explorerX, explorerY);
-    mvprintw(23, 0, "testing explorer5");
+    printBattle = 1;
    }
+
+       if(printBattle == 1){
+        mvprintw(23, 0, "You have entered a battle with a sentrie!");
+    }
+
 }
