@@ -121,6 +121,13 @@ PokeMart pokeMart;
 int hikerDirection = 0; 
 int rivalDirection = 0; 
 
+int hasHikerBeenBattled = 0;
+int hasRivalBeenBattled = 0;
+int hasPacerBeenBattled = 0;
+int hasWandererBeenBattled = 0;
+int hasSentrieBeenBattled = 0;
+int hasExplorerBeenBattled = 0;
+
 void generateMap(Map *map, int numtrainer);
 void printMap(Map *map);
 void fillMapGrass(Map *map);
@@ -990,12 +997,26 @@ int isPConCorM(Map *map) {
 }
 
 void isTrainerThere() {
-  isHikerThere();
-  isRivalThere();
-  isPacerThere();
-  isWandererThere();
-  isSentrieThere();
-  isExplorerThere();
+ if(hasHikerBeenBattled == 0){
+    isHikerThere();
+ } 
+  
+  if(hasRivalBeenBattled == 0){
+    isRivalThere();
+ }
+ if(hasPacerBeenBattled == 0){
+    isPacerThere();;
+ }
+ if(hasWandererBeenBattled == 0){
+    isWandererThere();
+ }
+ if(hasSentrieBeenBattled == 0){
+    isSentrieThere();
+ }
+ if(hasExplorerBeenBattled == 0){
+    isExplorerThere();
+ }
+  
 }
 
 void isHikerThere(){
@@ -1025,6 +1046,7 @@ void isHikerThere(){
    }
 
     if(printBattle == 1){
+        hasHikerBeenBattled = 1;
         mvprintw(22, 0, "You have entered a battle with a hiker!");
     }
 
@@ -1057,6 +1079,7 @@ void isRivalThere(){
    }
 
      if(printBattle == 1){
+        hasRivalBeenBattled = 1;
         mvprintw(22, 0, "You have entered a battle with a rival!");
     }
 
@@ -1089,6 +1112,7 @@ void isPacerThere(){
    }
 
       if(printBattle == 1){
+        hasPacerBeenBattled = 1;
         mvprintw(22, 0, "You have entered a battle with a pacer!");
     }
 
@@ -1121,6 +1145,7 @@ void isWandererThere(){
    }
 
     if(printBattle == 1){
+        hasWandererBeenBattled = 1;
         mvprintw(22, 0, "You have entered a battle with a wanderer!");
     }
 
@@ -1153,6 +1178,7 @@ void isSentrieThere(){
    }
 
       if(printBattle == 1){
+        hasSentrieBeenBattled = 1;
         mvprintw(22, 0, "You have entered a battle with a sentrie!");
     }
 
@@ -1185,6 +1211,7 @@ void isExplorerThere(){
    }
 
        if(printBattle == 1){
+        hasExplorerBeenBattled = 1;
         mvprintw(22, 0, "You have entered a battle with an Explorer!");
     }
 
