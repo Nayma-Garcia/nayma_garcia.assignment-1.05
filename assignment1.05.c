@@ -102,6 +102,22 @@ typedef struct {
 
 Explorer explorer;
 
+typedef struct {
+    char symbol;
+    Coordinate position;
+    int direction; 
+} PokeCenter;
+
+PokeCenter pokeCenter;
+
+typedef struct {
+    char symbol;
+    Coordinate position;
+    int direction; 
+} PokeMart;
+
+PokeMart pokeMart;
+
 int hikerDirection = 0; 
 int rivalDirection = 0; 
 
@@ -126,6 +142,8 @@ void pacerPosFromPC(int pacerX, int pacerY, int pcX, int pcY);
 void wandererPosFromPC(int wandererX, int wandererY, int pcX, int pcY);
 void sentriePosFromPC(int sentrieX, int sentrieY, int pcX, int pcY);
 void explorerPosFromPC(int explorerX, int explorerY, int pcX, int pcY);
+int isPConCorM(Map *map);
+void isTrainerThere();
 
 
 int numtrainers = 10;
@@ -166,6 +184,7 @@ int main(int argc, char* argv[]) {
      mvprintw(22, 0, "Please enter a command");
 
     while ((move = getch()) != 'q') {
+         isTrainerThere();
         if(move == '7' || move == 'y'){
             updatePCLocation(&map, move);
             updateHikerLocation(&map);
@@ -272,6 +291,10 @@ int main(int argc, char* argv[]) {
           sentriePosFromPC(sentrie.position.x, sentrie.position.y,pc.position.x, pc.position.y);
           //explorer
           explorerPosFromPC(explorer.position.x, explorer.position.y,pc.position.x, pc.position.y);
+       }else if(move == '>' && isPConCorM(&map) == 1){
+         mvprintw(22, 0, "Welcome to the PokeCenter!");
+       }else if (move == '>' && isPConCorM(&map) == 2){
+        mvprintw(22, 0, "Welcome to the PokeMart!");
        }
 
       
@@ -419,26 +442,37 @@ void genPathCM(Map *map) {
 
     x = rand() % (WIDTH - 3) + 1;  
     if (y < LENGTH - 1 && x < WIDTH - 1) {
-        map->map[y + 1][x] = 'C';
+        pokeCenter.symbol = 'C';
+        pokeCenter.position.x = x;
+        pokeCenter.position.y = y + 1;
     } else {
-        map->map[y - 1][x] = 'C';
+        pokeCenter.symbol = 'C';
+        pokeCenter.position.x = x;
+        pokeCenter.position.y = y - 1;
     }
 
     if (y < LENGTH - 1 && x < WIDTH - 1) {
-        map->map[y + 1][x + 1] = 'M';
+        pokeMart.symbol = 'M';
+        pokeMart.position.x = x + 1;
+        pokeMart.position.y = y + 1;
     } else if (map->map[y][x] == '#') {
-        map->map[y][x + 1] = 'M';
+        pokeMart.symbol = 'M';
+        pokeMart.position.x = x + 1;
+        pokeMart.position.y = y;
     } else {
-        map->map[y - 1][x - 1] = 'M';
+        pokeMart.symbol = 'M';
+        pokeMart.position.x = x - 1;
+        pokeMart.position.y = y - 1;
     }
+
+    map->map[pokeCenter.position.y][pokeCenter.position.x] = pokeCenter.symbol;
+    map->map[pokeMart.position.y][pokeMart.position.x] = pokeMart.symbol;
 
     x = rand() % (WIDTH - 3); 
     for (y = 0; y < LENGTH; y++) {
         map->map[y][x] = '#';
     }
 }
-
-
 
 
 
@@ -774,7 +808,6 @@ void updatePCLocation(Map *map, int move){
         newX = pc.position.x;
         newY = pc.position.y;
        }
-             
 
    if (newX >= 0 && newX < WIDTH - 1 && newY >= 0 && newY < LENGTH - 1) {
         pc.position.x = newX;
@@ -930,3 +963,48 @@ void explorerPosFromPC(int explorerX, int explorerY, int pcX, int pcY) {
     mvprintw(27, 0, "explorer: %s", directionStr);
     refresh(); 
 }
+
+int isPConCorM(Map *map) {
+    if (pc.position.x == pokeCenter.position.x && pc.position.y == pokeCenter.position.y) {
+        return 1; 
+    }
+
+    if(pc.position.x == pokeMart.position.x && pc.position.y == pokeMart.position.y){
+        return 2;
+    }
+    return 0; 
+}
+
+void isTrainerThere() {
+    int pcX = pc.position.x;
+    int pcY = pc.position.y;
+    int hikerX = hiker.position.x;
+    int hikerY = hiker.position.y;
+
+   if(pcX == hikerX){
+     mvprintw(26, 0, "testing hiker1");
+   }
+
+   if(pcX-1 == hikerX){
+    mvprintw(26, 0, "testing hiker1");
+   }
+
+   if(pcX+1 == hikerX){
+    mvprintw(26, 0, "testing hiker1");
+   }
+
+  if(pcY == hikerY){
+     mvprintw(26, 0, "testing hiker1");
+   }
+
+   if(pcY-1 == hikerY){
+    mvprintw(26, 0, "testing hiker1");
+   }
+
+   if(pcY+1 == hikerY){
+    mvprintw(26, 0, "testing hiker1");
+   }
+
+}
+
+
