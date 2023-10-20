@@ -301,6 +301,11 @@ int main(int argc, char* argv[]) {
          mvprintw(22, 0, "Welcome to the PokeCenter!");
        }else if (move == '>' && isPConCorM(&map) == 2){
         mvprintw(22, 0, "Welcome to the PokeMart!");
+       }else if(move == '<' || move == 27){
+            updatePCLocation(&map, move);
+            fflush(stdout);
+            usleep(500000);
+            printMap(&map);
        }
 
       
@@ -813,6 +818,9 @@ void updatePCLocation(Map *map, int move){
        }else if(move == '5' || move == '.' || move == ' '){
         newX = pc.position.x;
         newY = pc.position.y;
+       }else if(move == '<' || move == 27){
+        newX = pc.position.x;
+        newY = pc.position.y;
        }
 
    if (newX >= 0 && newX < WIDTH - 1 && newY >= 0 && newY < LENGTH - 1) {
@@ -823,10 +831,10 @@ void updatePCLocation(Map *map, int move){
 }
 
 void hikerPosFromPC(int hikerX, int hikerY, int pcX, int pcY) {
-    int north = hikerY - pcY;
-    int south = pcY - hikerY;
-    int west = hikerX - pcX;
-    int east = pcX - hikerX;
+    int north = pcY - hikerY;
+    int south = hikerY - pcY;
+    int east = hikerX - pcX;
+    int west = pcX - hikerX;
 
     char directionStr[100]; 
 
@@ -847,10 +855,10 @@ void hikerPosFromPC(int hikerX, int hikerY, int pcX, int pcY) {
 }
 
 void rivalPosFromPC(int rivalX, int rivalY, int pcX, int pcY) {
-    int north = rivalY - pcY;
-    int south = pcY - rivalY;
-    int west = rivalX - pcX;
-    int east = pcX - rivalX;
+    int south = rivalY - pcY;
+    int north = pcY - rivalY;
+    int east = rivalX - pcX;
+    int west = pcX - rivalX;
 
     char directionStr[100]; 
 
@@ -871,10 +879,10 @@ void rivalPosFromPC(int rivalX, int rivalY, int pcX, int pcY) {
 }
 
 void pacerPosFromPC(int pacerX, int pacerY, int pcX, int pcY) {
-    int north = pacerY - pcY;
-    int south = pcY - pacerY;
-    int west = pacerX - pcX;
-    int east = pcX - pacerX;
+    int south = pacerY - pcY;
+    int north = pcY - pacerY;
+    int east = pacerX - pcX;
+    int west = pcX - pacerX;
 
     char directionStr[100]; 
 
@@ -895,10 +903,10 @@ void pacerPosFromPC(int pacerX, int pacerY, int pcX, int pcY) {
 }
 
 void wandererPosFromPC(int wandererX, int wandererY, int pcX, int pcY) {
-    int north = wandererY - pcY;
-    int south = pcY - wandererY;
-    int west = wandererX - pcX;
-    int east = pcX - wandererX;
+    int south = wandererY - pcY;
+    int north = pcY - wandererY;
+    int east = wandererX - pcX;
+    int west = pcX - wandererX;
 
     char directionStr[100]; 
 
@@ -921,10 +929,10 @@ void wandererPosFromPC(int wandererX, int wandererY, int pcX, int pcY) {
 }
 
 void sentriePosFromPC(int sentrieX, int sentrieY, int pcX, int pcY) {
-    int north = sentrieY - pcY;
-    int south = pcY - sentrieY;
-    int west = sentrieX - pcX;
-    int east = pcX - sentrieX;
+    int south = sentrieY - pcY;
+    int north = pcY - sentrieY;
+    int east = sentrieX - pcX;
+    int west = pcX - sentrieX;
 
     char directionStr[100]; 
 
@@ -945,10 +953,10 @@ void sentriePosFromPC(int sentrieX, int sentrieY, int pcX, int pcY) {
 }
 
 void explorerPosFromPC(int explorerX, int explorerY, int pcX, int pcY) {
-    int north = explorerY - pcY;
-    int south = pcY - explorerY;
-    int west = explorerX - pcX;
-    int east = pcX - explorerX;
+    int south = explorerY - pcY;
+    int north = pcY - explorerY;
+    int east = explorerX - pcX;
+    int west = pcX - explorerX;
 
     char directionStr[100]; 
 
@@ -991,38 +999,33 @@ void isTrainerThere() {
 }
 
 void isHikerThere(){
-     int pcX = pc.position.x;
+    int pcX = pc.position.x;
     int pcY = pc.position.y;
     int hikerX = hiker.position.x;
     int hikerY = hiker.position.y;
     int printBattle = 0;
      if(pcX == hikerX && pcY == hikerY){
-     mvprintw(22, 0, "pc: (%d, %d)  hiker: (%d, %d)", pcX, pcY, hikerX, hikerY);
      printBattle = 1;
    }
 
    if(pcX-1 == hikerX && pcY == hikerY){
-    mvprintw(22, 0, "pc: (%d, %d)  hiker: (%d, %d)", pcX, pcY, hikerX, hikerY);
      printBattle = 1;
    }
 
    if(pcX+1 == hikerX &&  pcY == hikerY){
-    mvprintw(22, 0, "pc: (%d, %d)  hiker: (%d, %d)", pcX, pcY, hikerX, hikerY);
      printBattle = 1;
    }
 
    if(pcY-1 == hikerY && pcX == hikerX){
-    mvprintw(22, 0, "pc: (%d, %d)  hiker: (%d, %d)", pcX, pcY, hikerX, hikerY);
      printBattle = 1;
    }
 
    if(pcY+1 == hikerY && pcX == hikerX){
-    mvprintw(22, 0, "pc: (%d, %d)  hiker: (%d, %d)", pcX, pcY, hikerX, hikerY);
      printBattle = 1;
    }
 
     if(printBattle == 1){
-        mvprintw(23, 0, "You have entered a battle with a hiker!");
+        mvprintw(22, 0, "You have entered a battle with a hiker!");
     }
 
 }
@@ -1034,32 +1037,27 @@ void isRivalThere(){
     int rivalY = rival.position.y;
        int printBattle = 0;
      if(pcX == rivalX && pcY == rivalY){
-     mvprintw(22, 0, "pc: (%d, %d)  rival: (%d, %d)", pcX, pcY, rivalX, rivalY);
      printBattle = 1;
    }
 
    if(pcX-1 == rivalX && pcY == rivalY){
-    mvprintw(22, 0, "pc: (%d, %d)  rival: (%d, %d)", pcX, pcY, rivalX, rivalY);
     printBattle = 1;
    }
 
    if(pcX+1 == rivalX &&  pcY == rivalY){
-    mvprintw(22, 0, "pc: (%d, %d)  rival: (%d, %d)", pcX, pcY, rivalX, rivalY);
     printBattle = 1;
    }
 
    if(pcY-1 == rivalY && pcX == rivalX){
-    mvprintw(22, 0, "pc: (%d, %d)  rival: (%d, %d)", pcX, pcY, rivalX, rivalY);
     printBattle = 1;
    }
 
    if(pcY+1 == rivalY && pcX == rivalX){
-    mvprintw(22, 0, "pc: (%d, %d)  rival: (%d, %d)", pcX, pcY, rivalX, rivalY);
     printBattle = 1;
    }
 
      if(printBattle == 1){
-        mvprintw(23, 0, "You have entered a battle with a rival!");
+        mvprintw(22, 0, "You have entered a battle with a rival!");
     }
 
 }
@@ -1071,32 +1069,27 @@ void isPacerThere(){
     int pacerY = pacer.position.y;
     int printBattle = 0;
      if(pcX == pacerX && pcY == pacerY){
-     mvprintw(22, 0, "pc: (%d, %d)  pacer: (%d, %d)", pcX, pcY, pacerX, pacerY);
      printBattle = 1;
    }
 
    if(pcX-1 == pacerX && pcY == pacerY){
-    mvprintw(22, 0, "pc: (%d, %d)  pacer: (%d, %d)", pcX, pcY, pacerX, pacerY);
     printBattle = 1;
    }
 
    if(pcX+1 == pacerX &&  pcY == pacerY){
-    mvprintw(22, 0, "pc: (%d, %d)  pacer: (%d, %d)", pcX, pcY, pacerX, pacerY);
     printBattle = 1;
    }
 
    if(pcY-1 == pacerY && pcX == pacerX){
-    mvprintw(22, 0, "pc: (%d, %d)  pacer: (%d, %d)", pcX, pcY, pacerX, pacerY);
     printBattle = 1;
    }
 
    if(pcY+1 == pacerY && pcX == pacerX){
-    mvprintw(22, 0, "pc: (%d, %d)  pacer: (%d, %d)", pcX, pcY, pacerX, pacerY);
     printBattle = 1;
    }
 
       if(printBattle == 1){
-        mvprintw(23, 0, "You have entered a battle with a pacer!");
+        mvprintw(22, 0, "You have entered a battle with a pacer!");
     }
 
 }
@@ -1108,32 +1101,27 @@ void isWandererThere(){
     int wandererY = wanderer.position.y;
     int printBattle = 0;
      if(pcX == wandererX && pcY == wandererY){
-     mvprintw(22, 0, "pc: (%d, %d)  wanderer: (%d, %d)", pcX, pcY, wandererX, wandererY);
      printBattle = 1;
    }
 
    if(pcX-1 == wandererX && pcY == wandererY){
-    mvprintw(22, 0, "pc: (%d, %d)  wanderer: (%d, %d)", pcX, pcY, wandererX, wandererY);
      printBattle = 1;
    }
 
    if(pcX+1 == wandererX &&  pcY == wandererY){
-    mvprintw(22, 0, "pc: (%d, %d)  wanderer: (%d, %d)", pcX, pcY, wandererX, wandererY);
      printBattle = 1;
    }
 
    if(pcY-1 == wandererY && pcX == wandererX){
-    mvprintw(22, 0, "pc: (%d, %d)  wanderer: (%d, %d)", pcX, pcY, wandererX, wandererY);
      printBattle = 1;
    }
 
    if(pcY+1 == wandererY && pcX == wandererX){
-    mvprintw(22, 0, "pc: (%d, %d)  wanderer: (%d, %d)", pcX, pcY, wandererX, wandererY);
      printBattle = 1;
    }
 
     if(printBattle == 1){
-        mvprintw(23, 0, "You have entered a battle with a wanderer!");
+        mvprintw(22, 0, "You have entered a battle with a wanderer!");
     }
 
 }
@@ -1145,32 +1133,27 @@ void isSentrieThere(){
     int sentrieY = sentrie.position.y;
     int printBattle = 0;
      if(pcX == sentrieX && pcY == sentrieY){
-     mvprintw(22, 0, "pc: (%d, %d)  sentrie: (%d, %d)", pcX, pcY, sentrieX, sentrieY);
      printBattle = 1;
    }
 
    if(pcX-1 == sentrieX && pcY == sentrieY){
-    mvprintw(22, 0, "pc: (%d, %d)  sentrie: (%d, %d)", pcX, pcY, sentrieX, sentrieY);
     printBattle = 1;
    }
 
    if(pcX+1 == sentrieX &&  pcY == sentrieY){
-    mvprintw(22, 0, "pc: (%d, %d)  sentrie: (%d, %d)", pcX, pcY, sentrieX, sentrieY);
     printBattle = 1;
    }
 
    if(pcY-1 == sentrieY && pcX == sentrieX){
-    mvprintw(22, 0, "pc: (%d, %d)  sentrie: (%d, %d)", pcX, pcY, sentrieX, sentrieY);
     printBattle = 1;
    }
 
    if(pcY+1 == sentrieY && pcX == sentrieX){
-    mvprintw(22, 0, "pc: (%d, %d)  sentrie: (%d, %d)", pcX, pcY, sentrieX, sentrieY);
     printBattle = 1;
    }
 
       if(printBattle == 1){
-        mvprintw(23, 0, "You have entered a battle with a sentrie!");
+        mvprintw(22, 0, "You have entered a battle with a sentrie!");
     }
 
 }
@@ -1182,32 +1165,27 @@ void isExplorerThere(){
     int explorerY = explorer.position.y;
     int printBattle = 0;
      if(pcX == explorerX && pcY == explorerY){
-     mvprintw(22, 0, "pc: (%d, %d)  explorer: (%d, %d)", pcX, pcY, explorerX, explorerY);
      printBattle = 1;
    }
 
    if(pcX-1 == explorerX && pcY == explorerY){
-    mvprintw(22, 0, "pc: (%d, %d)  explorer: (%d, %d)", pcX, pcY, explorerX, explorerY);
     printBattle = 1;
    }
 
    if(pcX+1 == explorerX &&  pcY == explorerY){
-    mvprintw(22, 0, "pc: (%d, %d)  explorer: (%d, %d)", pcX, pcY, explorerX, explorerY);
     printBattle = 1;
    }
 
    if(pcY-1 == explorerY && pcX == explorerX){
-    mvprintw(22, 0, "pc: (%d, %d)  explorer: (%d, %d)", pcX, pcY, explorerX, explorerY);
     printBattle = 1;
    }
 
    if(pcY+1 == explorerY && pcX == explorerX){
-    mvprintw(22, 0, "pc: (%d, %d)  explorer: (%d, %d)", pcX, pcY, explorerX, explorerY);
     printBattle = 1;
    }
 
        if(printBattle == 1){
-        mvprintw(23, 0, "You have entered a battle with a sentrie!");
+        mvprintw(22, 0, "You have entered a battle with an Explorer!");
     }
 
 }
