@@ -9,6 +9,11 @@
 
 #define LENGTH 21
 #define WIDTH 80
+#define GRASS_PAIR 1
+#define WATER_PAIR 2
+#define BOULDER_PAIR 3
+#define TREE_PAIR 4
+#define PLAYER_PAIR 5
 
 typedef struct {
     char map[LENGTH][WIDTH];
@@ -168,6 +173,13 @@ int main(int argc, char* argv[]) {
     noecho();
     keypad(stdscr, TRUE);
     nodelay(stdscr, TRUE);
+
+    start_color();
+    init_pair(GRASS_PAIR, COLOR_YELLOW, COLOR_GREEN);
+    init_pair(WATER_PAIR, COLOR_CYAN, COLOR_BLUE);
+    init_pair(BOULDER_PAIR, COLOR_WHITE, COLOR_MAGENTA);
+    init_pair(TREE_PAIR, COLOR_GREEN, COLOR_YELLOW);
+    init_pair(PLAYER_PAIR, COLOR_MAGENTA, COLOR_RED);
 
     if (argc > 2) {
         printf("Usage: %s [<numtrainers>]\n", argv[0]);
@@ -409,7 +421,9 @@ void printMap(Map *map) {
             } else if (x == hiker.position.x && y == hiker.position.y) {
                 mvaddch(y,x, hiker.symbol);
             } else if (x == pc.position.x && y == pc.position.y) {
+                attron(COLOR_PAIR(PLAYER_PAIR));
                  mvaddch(y,x, pc.symbol);
+                attroff(COLOR_PAIR(PLAYER_PAIR));
             } else if (x == rival.position.x && y == rival.position.y) {
                  mvaddch(y,x, rival.symbol);
             } else if (x == pacer.position.x && y == pacer.position.y) {
@@ -432,7 +446,9 @@ void fillMapGrass(Map *map) {
     int x, y;
     for (y = 0; y < LENGTH; y++) {
         for (x = 0; x < WIDTH; x++) {
+            attron(COLOR_PAIR(GRASS_PAIR));
             map->map[y][x] = '.';
+            attroff(COLOR_PAIR(GRASS_PAIR));
         }
     }
 }
