@@ -10,10 +10,13 @@
 #define LENGTH 21
 #define WIDTH 80
 #define GRASS_PAIR 1
-#define WATER_PAIR 2
-#define BOULDER_PAIR 3
-#define TREE_PAIR 4
+#define TREE_PAIR 2
+#define WATER_PAIR 3
+#define BOULDER_PAIR 4
 #define PLAYER_PAIR 5
+#define POKECENTER 6
+#define POKEMART 7
+#define PATH 8
 
 typedef struct {
     char map[LENGTH][WIDTH];
@@ -162,6 +165,8 @@ void isPacerThere();
 void isWandererThere();
 void isSentrieThere();
 void isExplorerThere();
+void  clearMapAroundTrainerList();
+
 
 
 int numtrainers = 10;
@@ -175,11 +180,15 @@ int main(int argc, char* argv[]) {
     nodelay(stdscr, TRUE);
 
     start_color();
-    init_pair(GRASS_PAIR, COLOR_YELLOW, COLOR_GREEN);
-    init_pair(WATER_PAIR, COLOR_CYAN, COLOR_BLUE);
-    init_pair(BOULDER_PAIR, COLOR_WHITE, COLOR_MAGENTA);
-    init_pair(TREE_PAIR, COLOR_GREEN, COLOR_YELLOW);
-    init_pair(PLAYER_PAIR, COLOR_MAGENTA, COLOR_RED);
+    init_pair(GRASS_PAIR, COLOR_GREEN, COLOR_BLACK);
+    init_pair(WATER_PAIR, COLOR_BLUE, COLOR_BLACK);
+    init_pair(BOULDER_PAIR, COLOR_MAGENTA, COLOR_BLACK);
+    init_pair(TREE_PAIR, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(PLAYER_PAIR, COLOR_RED, COLOR_BLACK);
+    init_pair(POKECENTER, COLOR_CYAN, COLOR_BLACK);
+    init_pair(POKEMART, COLOR_CYAN, COLOR_BLACK);
+    init_pair(PATH, COLOR_YELLOW, COLOR_BLACK);
+
 
     if (argc > 2) {
         printf("Usage: %s [<numtrainers>]\n", argv[0]);
@@ -195,8 +204,6 @@ int main(int argc, char* argv[]) {
     } else {
         numtrainers = 10;
     }
-
-    printf("%d\n", numtrainers);
 
     srand(time(NULL));
 
@@ -304,6 +311,8 @@ int main(int argc, char* argv[]) {
           fflush(stdout);
           usleep(500000);
           printMap(&map);
+
+          clearMapAroundTrainerList();
           //hiker
           hikerPosFromPC(hiker.position.x, hiker.position.y,pc.position.x, pc.position.y);
           //rival
@@ -446,9 +455,7 @@ void fillMapGrass(Map *map) {
     int x, y;
     for (y = 0; y < LENGTH; y++) {
         for (x = 0; x < WIDTH; x++) {
-            attron(COLOR_PAIR(GRASS_PAIR));
             map->map[y][x] = '.';
-            attroff(COLOR_PAIR(GRASS_PAIR));
         }
     }
 }
@@ -467,7 +474,6 @@ void generateBorder(Map *map) {
 
 void genPathCM(Map *map) {
     int x, y;
-
     // Making the path that goes from east to west
     y = rand() % (LENGTH - 3) + 1;  // So it doesn't touch the top border
     for (x = 0; x < WIDTH; x++) {
@@ -528,6 +534,7 @@ void generateTerrain(Map *map) {
             }
         }
     }
+    refresh();
 }
 
 int getRandom(int min, int max) {
@@ -873,7 +880,7 @@ void hikerPosFromPC(int hikerX, int hikerY, int pcX, int pcY) {
         sprintf(directionStr + strlen(directionStr), " by %d east", east);
     } 
 
-    mvprintw(22, 0, "hiker: %s", directionStr);
+    mvprintw(4, 25, "hiker: %s", directionStr);
     refresh(); 
 }
 
@@ -897,7 +904,7 @@ void rivalPosFromPC(int rivalX, int rivalY, int pcX, int pcY) {
         sprintf(directionStr + strlen(directionStr), " by %d east", east);
     } 
 
-    mvprintw(23, 0, "rival: %s", directionStr);
+    mvprintw(5, 25, "rival: %s", directionStr);
     refresh(); 
 }
 
@@ -921,7 +928,7 @@ void pacerPosFromPC(int pacerX, int pacerY, int pcX, int pcY) {
         sprintf(directionStr + strlen(directionStr), " by %d east", east);
     } 
 
-    mvprintw(24, 0, "pacer: %s", directionStr);
+    mvprintw(6, 25, "pacer: %s", directionStr);
     refresh(); 
 }
 
@@ -947,7 +954,7 @@ void wandererPosFromPC(int wandererX, int wandererY, int pcX, int pcY) {
         sprintf(directionStr + strlen(directionStr), " by on the same longitude");
     }
 
-    mvprintw(25, 0, "wanderer: %s", directionStr);
+    mvprintw(7, 25, "wanderer: %s", directionStr);
     refresh(); 
 }
 
@@ -971,7 +978,7 @@ void sentriePosFromPC(int sentrieX, int sentrieY, int pcX, int pcY) {
         sprintf(directionStr + strlen(directionStr), " by %d east", east);
     } 
 
-    mvprintw(26, 0, "sentrie: %s", directionStr);
+    mvprintw(8, 25, "sentrie: %s", directionStr);
     refresh(); 
 }
 
@@ -997,7 +1004,7 @@ void explorerPosFromPC(int explorerX, int explorerY, int pcX, int pcY) {
         sprintf(directionStr + strlen(directionStr), " by on the same longitude");
     }
 
-    mvprintw(27, 0, "explorer: %s", directionStr);
+    mvprintw(9, 25, "explorer: %s", directionStr);
     refresh(); 
 }
 
@@ -1232,3 +1239,17 @@ void isExplorerThere(){
     }
 
 }
+
+void clearMapAroundTrainerList() {
+    int startY = 3;  
+    int endY = 10;   
+    int startX = 22;  
+    int endX = 55;    
+
+    for (int y = startY; y <= endY; y++) {
+        for (int x = startX; x <= endX; x++) {
+            mvprintw(y, x, " "); 
+        }
+    }
+}
+
