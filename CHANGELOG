@@ -1,0 +1,13 @@
+10/16
+    12:10PM: Started working on the next assignment. Started by modifying the main function to handle the input. I started with just handling the input that moves the pc, i plan on adding the other commands in later.
+    1:30PM: Had some issues with the pc moving very slow, but the TA said that was fine during office hours, might fix later.
+
+10/18
+	4:00pm: I started working on getting the list of trainers to show up. I was very confused on how to do this so i went to office hours. 
+    8:00pm I figured out how to display the list of trainers. I then made functions to find where each trainer was in relation to the PC, i then called those functions in my main function. At first i displayed it under my map but then i figured out how to display it ON the map by clearing a space around it. 
+
+10/21
+	1:30pm : I started today with getting the rest of the commands working, i got the pokemart, and pokecenter done and everything else.
+
+10/22
+    3:30pm: Today I just worked with the ncurses colors a bit, i only added color to the PC to make it easier to see though. I also updated my readme and am ready to turn in. Might add more color later if I have time.

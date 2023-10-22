@@ -1,0 +1,3 @@
+This program allows the user to control the player character (PC) around the map. It also adds new screens where the player can see how far each trainer is by pressing 't'. The player also engages in battles with the trainers (its just a placeholder text for now though). The player can also enter PokeCenters & PokeMarts (also just placeholder text for now). 
+
+Some text such as the placeholder text for the PokeCenter, PokeMart and Battles are displayed BELOW the map. I also made the PC red to make it easier to see, but the rest of the map is not colored in yet.

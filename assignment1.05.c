@@ -202,7 +202,7 @@ int main(int argc, char* argv[]) {
             return 1;
         }
     } else {
-        numtrainers = 10;
+        numtrainers = 0;
     }
 
     srand(time(NULL));
@@ -225,7 +225,7 @@ int main(int argc, char* argv[]) {
             updateWandererLocation(&map);
             updateExplorerLocation(&map);
             fflush(stdout);
-            usleep(500000);
+            usleep(50000);
             printMap(&map);
         }else if(move == '8' || move == 'k'){
         updatePCLocation(&map, move);
@@ -235,7 +235,7 @@ int main(int argc, char* argv[]) {
             updateWandererLocation(&map);
             updateExplorerLocation(&map);
             fflush(stdout);
-            usleep(500000);
+            usleep(50000);
             printMap(&map);
        }else if(move == '9' || move == 'u'){
        updatePCLocation(&map, move);
@@ -245,7 +245,7 @@ int main(int argc, char* argv[]) {
             updateWandererLocation(&map);
             updateExplorerLocation(&map);
             fflush(stdout);
-            usleep(500000);
+            usleep(50000);
             printMap(&map);
        }else if(move =='6' || move == 'l'){
         updatePCLocation(&map, move);
@@ -255,7 +255,7 @@ int main(int argc, char* argv[]) {
             updateWandererLocation(&map);
             updateExplorerLocation(&map);
             fflush(stdout);
-            usleep(500000);
+            usleep(50000);
             printMap(&map);
        }else if(move =='3' || move == 'n'){
        updatePCLocation(&map, move);
@@ -265,7 +265,7 @@ int main(int argc, char* argv[]) {
             updateWandererLocation(&map);
             updateExplorerLocation(&map);
             fflush(stdout);
-            usleep(500000);
+            usleep(50000);
             printMap(&map);
        }else if(move =='2' || move == 'j'){
         updatePCLocation(&map, move);
@@ -275,7 +275,7 @@ int main(int argc, char* argv[]) {
             updateWandererLocation(&map);
             updateExplorerLocation(&map);
             fflush(stdout);
-            usleep(500000);
+            usleep(50000);
             printMap(&map);
        }else if(move =='1' || move == 'b'){
         updatePCLocation(&map, move);
@@ -285,7 +285,7 @@ int main(int argc, char* argv[]) {
             updateWandererLocation(&map);
             updateExplorerLocation(&map);
             fflush(stdout);
-            usleep(500000);
+            usleep(50000);
             printMap(&map);
        }else if(move =='4' || move == 'h'){
             updatePCLocation(&map, move);
@@ -295,7 +295,7 @@ int main(int argc, char* argv[]) {
             updateWandererLocation(&map);
             updateExplorerLocation(&map);
             fflush(stdout);
-            usleep(500000);
+            usleep(50000);
             printMap(&map);
        }else if(move == '5' || move =='.' || move == ' '){
             updatePCLocation(&map, move);
@@ -305,11 +305,11 @@ int main(int argc, char* argv[]) {
             updateWandererLocation(&map);
             updateExplorerLocation(&map);
             fflush(stdout);
-            usleep(500000);
+            usleep(50000);
             printMap(&map);
        }else if(move =='t'){
           fflush(stdout);
-          usleep(500000);
+          usleep(50000);
           printMap(&map);
 
           clearMapAroundTrainerList();
@@ -950,9 +950,7 @@ void wandererPosFromPC(int wandererX, int wandererY, int pcX, int pcY) {
         sprintf(directionStr + strlen(directionStr), " by %d west", west);
     } else if (east > 0) {
         sprintf(directionStr + strlen(directionStr), " by %d east", east);
-    } else {
-        sprintf(directionStr + strlen(directionStr), " by on the same longitude");
-    }
+    } 
 
     mvprintw(7, 25, "wanderer: %s", directionStr);
     refresh(); 
@@ -1000,9 +998,7 @@ void explorerPosFromPC(int explorerX, int explorerY, int pcX, int pcY) {
         sprintf(directionStr + strlen(directionStr), " by %d west", west);
     } else if (east > 0) {
         sprintf(directionStr + strlen(directionStr), " by %d east", east);
-    } else {
-        sprintf(directionStr + strlen(directionStr), " by on the same longitude");
-    }
+    } 
 
     mvprintw(9, 25, "explorer: %s", directionStr);
     refresh(); 
